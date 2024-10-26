@@ -1,21 +1,23 @@
-
 import { useContext } from "react";
 import { CreatAuthContext } from "../Firebase/Authprovider";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
+const useAdmin = () => {
+    const { user } = useContext(CreatAuthContext);
 
-const Useadmin = () => {
-    const {user} = useContext(CreatAuthContext)
-    const {data : isadmin} = useQuery({
-        queryKey:[user?.email, "isadmin"],
-        queryFn: async()=>{
-            const res = await axios.get(`http://localhost:3000/user/admin/${user.email}`)
-            return res?.data.admin
-        }
-    })
-    return {isadmin}
+    const { data: isAdmin} = useQuery({
+        queryKey: [user?.email, "isAdmin"],
+        queryFn: async () => {
+            if (!user?.email) return false; // Prevents axios call if email is not available
+            const res = await axios.get(`http://localhost:3000/user/admin/${user.email}`);
+           console.log(res?.data?.admin)
+            return res?.data?.admin; 
+        },
        
+    });
+
+    return [isAdmin];
 };
 
-export default Useadmin;
+export default useAdmin;
