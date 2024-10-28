@@ -34,7 +34,7 @@ const Navber = () => {
             <header className="flex shadow-md py-4 px-4  sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50">
                 <div className="flex flex-wrap items-center justify-between gap-5 w-full">
                     <a href="javascript:void(0)">
-                        <img src="/logo.png" alt="logo" className="w-40" />
+                        <img src="/logo.png" alt="logo" className="w-32 md:w-40" />
                     </a>
 
                     <div
@@ -83,10 +83,10 @@ const Navber = () => {
                         </ul>
                     </div>
 
-                    <div className="flex items-center max-lg:ml-auto space-x-3">
+                    <div className="flex items-center max-lg:ml-auto space-x-1 md:space-x-3">
                         {
                             user && <Link to={'/notice'}>
-                                <IoMdNotifications className='text-3xl' />
+                                <IoMdNotifications className='text-2xl md:text-3xl' />
                             </Link>
                         }
 
@@ -99,28 +99,28 @@ const Navber = () => {
                                 ></div>
 
                                 <div
-                                    className="shrink-0 bg-border w-[1px] h-4"
+                                    className="shrink-0 bg-border md:w-[1px] h-4"
                                     role="none"
                                     data-orientation="vertical"
                                 ></div>
-                                <span className="inline-flex items-center text-sm md:text-xl font-playfair animate-gradient whitespace-pre bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent [--bg-size:300%]">
+                                <span className="inline-flex items-center text-[12px] md:text-xl font-playfair animate-gradient whitespace-pre bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] -mx-2 md:-mx-0 to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent [--bg-size:300%]">
                                     Login out
-                                    <FiLogIn className="ml-2 text-[#ffaa40] text-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40]" />
+                                    <FiLogIn className="md:ml-2 text-[#ffaa40] text-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40]" />
                                 </span>
 
                             </button> : <Link to={'/login'}
                                 className="group relative flex flex-row items-center bg-[#212121] justify-center gap-2 rounded-2xl px-4 py-2 items-center text-sm font-medium shadow-[inset_0_-8px_10px_#8fdfff1f] transition-shadow duration-500 ease-out hover:shadow-[inset_0_-5px_10px_#8fdfff3f]"
                             >
-                                <div
+                      <div
                                     className="absolute items-center inset-0 block h-full w-full animate-gradient bg-gradient-to-r from-[#ffaa40]/50 via-[#9c40ff]/50 to-[#ffaa40]/50 bg-[length:var(--bg-size)_100%] [border-radius:inherit] [mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] p-[1px] ![mask-composite:subtract]"
                                 ></div>
 
                                 <div
-                                    className="shrink-0 bg-border w-[1px] h-4"
+                                    className="shrink-0 bg-border md:w-[1px] h-4"
                                     role="none"
                                     data-orientation="vertical"
                                 ></div>
-                                <span className="inline-flex items-center text-sm md:text-xl  font-playfair animate-gradient whitespace-pre bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent [--bg-size:300%]">
+                                <span className="inline-flex items-center text-[12px] md:text-xl font-playfair animate-gradient whitespace-pre bg-gradient-to-r from-[#ffaa40] via-[#9c40ff] -mx-2 md:-mx-0 to-[#ffaa40] bg-[length:var(--bg-size)_100%] bg-clip-text text-transparent [--bg-size:300%]">
                                     Login
                                     <FiLogIn className="ml-2 text-[#ffaa40] text-gradient-to-r from-[#ffaa40] via-[#9c40ff] to-[#ffaa40]" />
                                 </span>
