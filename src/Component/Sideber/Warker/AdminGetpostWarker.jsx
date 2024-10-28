@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AdminGetPostWorker = () => {
     const [allWorker, setAllWorker] = useState([]);
@@ -7,7 +8,7 @@ const AdminGetPostWorker = () => {
     useEffect(() => {
         axios.get('https://inventory-management-one-psi.vercel.app/adminpostget')
             .then((result) => {
-               const foundUsers = result?.data?.filter(user => 
+                const foundUsers = result?.data?.filter(user =>
                     user.categorypost === "worker" && user.poster.role === "admin"
                 );
 
@@ -21,7 +22,11 @@ const AdminGetPostWorker = () => {
     }, []);
 
     return (
+
         <div>
+            <Helmet>
+                <title>Home || dashboard Admin post</title>
+            </Helmet>
             {allWorker.map((data) => (
                 <div key={data._id} className="max-w-5xl mx-auto bg-gray-100 p-10 rounded font-sans mb-6">
                     <div>

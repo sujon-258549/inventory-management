@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import '../../signuplogin/contact.css';
 import { MdOutlineEmail } from "react-icons/md";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const UserDetail = () => {
     const navigate = useNavigate();
@@ -31,6 +32,9 @@ const UserDetail = () => {
 
     return (
         <div className="pb-10">
+             <Helmet>
+                <title>Home || dashboard Details Product</title>
+            </Helmet>
             <div className="mt-6 max-w-6xl max-lg:max-w-3xl mx-auto bg-[#2e0249] rounded-lg">
                 <div className="flex flex-col-reverse items-center gap-14 sm:p-8 p-4 font-[sans-serif]">
                     <div>
@@ -138,7 +142,7 @@ const UserDetail = () => {
                                 required
                         
                             >
-                                <option value="" disabled>Select a role</option>
+                                <option value={''} disabled>Select a role</option>
                                 <option value="worker">Worker</option>
                                 <option value="supervisor">Supervisor</option>
                                 <option value="marketing">Marketing</option>

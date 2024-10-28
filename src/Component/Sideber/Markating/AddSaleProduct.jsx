@@ -1,47 +1,61 @@
 import axios from "axios";
 import { FaLocationArrow, FaPhone } from "react-icons/fa";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import '../../../Component/signuplogin/contact.css';
 import { MdOutlineEmail } from "react-icons/md";
+import { useState } from "react";
 import UseUserrole from "../../customhuk/UseUserrole";
-import { useContext } from "react";
-import { CreatAuthContext } from "../../Firebase/Authprovider";
 import { Helmet } from "react-helmet-async";
 
 
+const dressCategories = [
+    { value: "male_business_suit", label: "Male - Business Suit" },
+    { value: "male_tuxedo", label: "Male - Tuxedo" },
+    { value: "male_blazer_dress_pants", label: "Male - Blazer and Dress Pants" },
+    { value: "male_dress_shirt_trousers", label: "Male - Dress Shirt and Trousers" },
+    { value: "male_three_piece_suit", label: "Male - Three-Piece Suit" },
+    { value: "male_formal_ethnic", label: "Male - Formal Ethnic Wear" },
+    { value: "female_business_suit", label: "Female - Business Suit" },
+    { value: "female_formal_dress", label: "Female - Formal Dress" },
+    { value: "female_evening_gown", label: "Female - Evening Gown" },
+    { value: "female_blouse_dress_skirt", label: "Female - Blouse and Dress Skirt" },
+    { value: "female_pantsuit", label: "Female - Pantsuit" },
+    { value: "female_formal_ethnic", label: "Female - Formal Ethnic Wear" },
+];
 
-const UpdateProduct = () => {
-    const {_id,message,productCategory,number} = useLoaderData()
-
-    console.log(message,_id)
-    const { user } = useContext(CreatAuthContext)
+const AddSaleProduct = () => {
     const [isUserrole] = UseUserrole()
+    console.log(isUserrole)
     const navigate = useNavigate();
-    const updatedate = new Date().toISOString(); // Store date as ISO string
-
+    const date = new Date().toISOString(); // Store date as ISO string
+    const [productCategory, setProductCategory] = useState()
     const handleContactFormSubmit = async (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-        const updateproductinfo = {
-            producctNumber: formData.get("number"),
-            email: user.email,
-            updatedate
+        const productinfo = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            number: formData.get("number"),
+            message: formData.get("message"),
+            date,
+            productCategory,
+            mobile: isUserrole.number,
+            role : isUserrole.role
         };
 
-        console.log(updateproductinfo)
+        console.log(productinfo)
 
         try {
-            // Send a PATCH request to update the product
-            const response = await axios.patch(`https://inventory-management-one-psi.vercel.app/updateproduct/${_id}`, updateproductinfo);
-            if (response.data.modifiedCount) { // Check if a document was modified
+            const response = await axios.post('https://inventory-management-one-psi.vercel.app/selproduct', productinfo);
+            if (response.data.insertedId) {
                 Swal.fire({
                     icon: "success",
                     title: "Success",
-                    text: "Product updated successfully!",
+                    text: "User created successfully!",
                 });
-                navigate('/dashboard'); // Navigate to dashboard after successful update
+                navigate('/dashboard');
             }
         } catch (error) {
             console.error("There was an error submitting the form:", error);
@@ -56,7 +70,7 @@ const UpdateProduct = () => {
     return (
         <div className="md:pb-28 md:pt-5 px-5 pb-10">
              <Helmet>
-                <title>Home || dashboard Update Product</title>
+                <title>Home || dashboard Add sale Product</title>
             </Helmet>
             <div className="mt-6 max-w-6xl max-lg:max-w-3xl mx-auto bg-[#2e0249] rounded-lg">
                 <div className="flex flex-col-reverse items-center gap-14 sm:p-8 p-4 font-[sans-serif]">
@@ -132,7 +146,7 @@ const UpdateProduct = () => {
 
                     <div className="bg-gray-100 p-6 rounded-lg">
                         <p className="text-2xl md:text-4xl text-center font-playfair font-extrabold text-gray-800">
-                            Contact us
+                            Sale Product add Form
                         </p>
                         <form onSubmit={handleContactFormSubmit} className="mt-8 space-y-4">
                             <input
@@ -151,22 +165,24 @@ const UpdateProduct = () => {
                                 required
                                 value={isUserrole.email}
                             />
-                            <input
-                                type="text"
-                                name="text"
-                                placeholder="productCategory"
-                                className="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-[#a91079]"
+                            <select
+                                onChange={(e) => setProductCategory(e.target.value)}
+                                className="w-full rounded-lg py-[14px] px-4 text-gray-800 text-sm outline-[#a91079]"
                                 required
-                                defaultValue={productCategory}
-                            />
-
+                            >
+                                <option value="" disabled>Select a category</option>
+                                {dressCategories.map((category) => (
+                                    <option key={category.value} value={category.value}>
+                                        {category.label}
+                                    </option>
+                                ))}
+                            </select>
                             <input
                                 type="tel"
                                 name="number"
                                 placeholder="Enter Your Create product Number"
                                 className="w-full rounded-lg py-3 px-4 text-gray-800 text-sm outline-[#a91079]"
                                 required
-                                defaultValue={number}
                             />
                             <textarea
                                 placeholder="Message"
@@ -174,7 +190,6 @@ const UpdateProduct = () => {
                                 rows={6}
                                 className="w-full rounded-lg px-4 text-gray-800 text-sm outline-[#a91079]"
                                 required
-                                value={message}
                             />
                             <button type="submit" className="w-full py-2 px-4 bg-[#a91079] text-white rounded-lg">
                                 Send Message
@@ -187,4 +202,4 @@ const UpdateProduct = () => {
     );
 };
 
-export default UpdateProduct;
+export default AddSaleProduct;

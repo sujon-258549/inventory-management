@@ -27,6 +27,10 @@ import GatDetail from "../Sideber/Markating/GatDetail";
 import UpdateProduct from "../Sideber/Markating/UpdateProduct";
 import Markationg from "../Sideber/Markating/Markationg";
 import Error from "../Errorpage/Error";
+import AddSaleProduct from "../Sideber/Markating/AddSaleProduct";
+import SaleGetproduct from "../Sideber/Supervisor/SaleGetproduct";
+import DetailSaleproduct from "../Sideber/Markating/DetailSaleproduct";
+import AdminAllnotice from "../Home/AdminAllnotice";
 
 
 const router = createBrowserRouter([
@@ -46,6 +50,10 @@ const router = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact />
+            },
+            {
+                path: '/notice',
+                element: <AdminAllnotice />
             },
             {
                 path: '/dashboard',  // Corrected path
@@ -71,6 +79,12 @@ const router = createBrowserRouter([
                         loader: ({ params }) => fetch(`https://inventory-management-one-psi.vercel.app/singalgetproduct/${params.id}`)
                     },
                     {
+                        // dingle get product
+                        path: '/dashboard/getselproductid/:id',
+                        element: <DetailSaleproduct></DetailSaleproduct>,
+                        loader: ({ params }) => fetch(`https://inventory-management-one-psi.vercel.app/getselproductid/${params.id}`)
+                    },
+                    {
                         path: '/dashboard/updateproduct/:id',
                         element: <UpdateProduct></UpdateProduct>,
                         loader: ({ params }) => fetch(`https://inventory-management-one-psi.vercel.app/singalgetproduct/${params.id}`)
@@ -82,6 +96,14 @@ const router = createBrowserRouter([
                     {
                         path: '/dashboard/getsupervisorpost',  // Corrected path
                         element: <Privaterouter><GetSupervisorpost /></Privaterouter>  // Corrected typo in component
+                    },
+                    {
+                        path: '/dashboard/getselproduct',  // Corrected path
+                        element: <Privaterouter><SaleGetproduct /></Privaterouter>  // Corrected typo in component
+                    },
+                    {
+                        path: '/dashboard/selproduct',  // Corrected path
+                        element: <Privaterouter><AddSaleProduct /></Privaterouter>  // Corrected typo in component
                     },
                     {
                         path: '/dashboard/addproduct',  // Corrected path

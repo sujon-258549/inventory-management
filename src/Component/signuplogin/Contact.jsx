@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import './contact.css';
 import { MdOutlineEmail } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
     const navigate = useNavigate();
@@ -21,6 +22,10 @@ const Contact = () => {
             message: formData.get("message"),
             date
         };
+
+
+
+
 
         try {
             const response = await axios.post('https://inventory-management-one-psi.vercel.app/contact', contactInfo);
@@ -44,6 +49,9 @@ const Contact = () => {
 
     return (
         <div className="pt-28 px-5 pb-10">
+            <Helmet>
+                <title>Home || Contact</title>
+            </Helmet>
             <div className="mt-6 max-w-6xl max-lg:max-w-3xl mx-auto bg-[#2e0249] rounded-lg">
                 <div className="grid lg:grid-cols-2 items-center gap-14 sm:p-8 p-4 font-[sans-serif]">
                     <div>

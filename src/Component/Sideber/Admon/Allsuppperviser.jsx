@@ -3,6 +3,7 @@ import UseAllsupervisor from "../../customhuk/UseAlluseperivsor";
 import Loding from "../../Loding/Loding";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const AllSupervisors = () => {
     const { allsupervisor, refetch, isLoading } = UseAllsupervisor();
@@ -35,6 +36,9 @@ const AllSupervisors = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Home || dashboard all Supervisor</title>
+            </Helmet>
             {allsupervisor.length === 0 ? (
                 <h1 className="text-4xl font-bold font-playfair">No supervisor</h1>
             ) : (

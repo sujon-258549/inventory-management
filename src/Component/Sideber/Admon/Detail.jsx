@@ -1,13 +1,16 @@
-import { FaFileMedical, FaPhone, FaUserEdit } from "react-icons/fa"
+import { Helmet } from "react-helmet-async"
+import {  FaPhone, FaUserEdit } from "react-icons/fa"
 import { MdOutlineDateRange, MdOutlineEmail } from "react-icons/md"
 import { useLoaderData } from "react-router-dom"
 
 
 const Detail = () => {
-    const { date, message, subject, number, email, name } = useLoaderData()
+    const { date, message, subject, number, name } = useLoaderData()
     return (
         <div className="pb-10" >
-           
+               <Helmet>
+                <title>Home || dashboard Details Product</title>
+            </Helmet>
             <div className="bg-gray-700 shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] p-6 w-full rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4" style={{boxShadow:'1px 1px 1px 5px #212121'}}>
                 <p className="text-white flex gap-3"> <MdOutlineDateRange className="text-2xl" /> {date.slice(0,10)}</p>
                 <div className="flex items-center">

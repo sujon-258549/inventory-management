@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Getadminpost = () => {
     const [allMarketingPosts, setAllMarketingPosts] = useState([]);
@@ -21,7 +22,9 @@ const Getadminpost = () => {
     return (
         <div>
 
-
+            <Helmet>
+                <title>Home || dashboard all admin post</title>
+            </Helmet>
             {allMarketingPosts.map((data) => (
                 <div key={data._id} className="max-w-5xl mx-auto bg-gray-100 p-10 rounded font-sans mb-6">
                     <div>

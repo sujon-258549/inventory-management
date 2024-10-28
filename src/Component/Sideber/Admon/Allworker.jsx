@@ -5,15 +5,16 @@ import UseAllworker from "../../customhuk/UseAllworker";
 import Loding from "../../Loding/Loding";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Allworker = () => {
 
-    const { allworker,refetch, isLoading } = UseAllworker();
+    const { allworker, refetch, isLoading } = UseAllworker();
 
     if (isLoading) {
         return <p><Loding></Loding></p>;
     }
-   
+
     const handelworkerdelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -41,6 +42,9 @@ const Allworker = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Home || dashboard all Worker</title>
+            </Helmet>
             <div>
                 {allworker.length <= 0 ? (
                     <h1 className="text-4xl font-bold font-playfair">No supervisor</h1>
@@ -82,7 +86,7 @@ const Allworker = () => {
                                                     />
                                                 </svg>
                                             </Link>
-                                            <button onClick={()=>handelworkerdelete(supervisor._id)} className="mr-4" title="Delete">
+                                            <button onClick={() => handelworkerdelete(supervisor._id)} className="mr-4" title="Delete">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     className="w-5 fill-red-500 hover:fill-red-700"

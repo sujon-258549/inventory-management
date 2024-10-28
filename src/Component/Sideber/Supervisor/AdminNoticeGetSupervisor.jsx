@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AdminNoticeGetSupervisor = () => {
     const [allsupervisor, setAllsupervisor] = useState([]);
@@ -25,7 +26,9 @@ const AdminNoticeGetSupervisor = () => {
     return (
         <div>
 
-
+            <Helmet>
+                <title>Home || dashboard admin post</title>
+            </Helmet>
             {allsupervisor.map((data) => (
                 <div key={data._id} className="max-w-5xl mx-auto bg-gray-100 p-10 rounded font-sans mb-6">
                     <div>

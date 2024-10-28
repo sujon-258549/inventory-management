@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Supervisernotice = () => {
     const [allWorker, setAllWorker] = useState([]);
@@ -22,6 +23,9 @@ const Supervisernotice = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Home || dashboard Supervisor post</title>
+            </Helmet>
             {allWorker.map((data) => (
                 <div key={data._id} className="max-w-5xl mx-auto bg-gray-100 p-10 rounded font-sans mb-6">
                     <div>

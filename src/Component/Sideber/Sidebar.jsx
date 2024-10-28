@@ -13,6 +13,8 @@ import UseSupervisor from "../customhuk/UseSuparviser";
 import UseWorker from "../customhuk/UseWorker";
 import { useState } from "react";
 import UseUserrole from "../customhuk/UseUserrole";
+import { FaCartShopping } from "react-icons/fa6";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -68,7 +70,9 @@ const Sidebar = () => {
                         {
                             isAdmin &&
                             <>
-
+                                <Helmet>
+                                    <title>Home || dashboard</title>
+                                </Helmet>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <Link to={'/dashboard'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdAssessment /> Dashboard</Link>
                                 </li>
@@ -84,6 +88,12 @@ const Sidebar = () => {
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/getsupervisorpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> All Product</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/getselproduct'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FaCartShopping /> Sale Product</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/selproduct'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FaCartShopping /> Add Sale Product</NavLink>
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/allnotice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> All Notice</NavLink>
@@ -106,6 +116,9 @@ const Sidebar = () => {
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/markatingetpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FaSellcast /> Admin Notice</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/selproduct'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FaCartShopping /> Add Sale Product</NavLink>
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/getmarkatingsuperviserpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Supervisor Notice</NavLink>
@@ -132,6 +145,9 @@ const Sidebar = () => {
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/getsupervisorpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> All Product</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/getselproduct'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FaCartShopping /> Sale Product</NavLink>
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/workernotice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Worker Notice</NavLink>

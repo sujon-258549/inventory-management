@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Workernotice = () => {
     const [allWorker, setAllWorker] = useState([]);
@@ -7,7 +8,7 @@ const Workernotice = () => {
     useEffect(() => {
         axios.get('https://inventory-management-one-psi.vercel.app/adminpostget')
             .then((result) => {
-               const foundUsers = result?.data?.filter(user => 
+                const foundUsers = result?.data?.filter(user =>
                     user.categorypost === "worker" && user.poster.role === "worker"
                 );
 
@@ -22,6 +23,9 @@ const Workernotice = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Home || dashboard Worket Notice</title>
+            </Helmet>
             {allWorker.map((data) => (
                 <div key={data._id} className="max-w-5xl mx-auto bg-gray-100 p-10 rounded font-sans mb-6">
                     <div>

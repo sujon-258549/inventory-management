@@ -3,6 +3,7 @@ import { useContext, useState } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { Link, NavLink } from 'react-router-dom';
 import { CreatAuthContext } from '../Firebase/Authprovider';
+import { IoMdNotifications } from "react-icons/io";
 import './navber.css'
 
 const Navber = () => {
@@ -78,11 +79,16 @@ const Navber = () => {
                                 <NavLink to={'/contact'} href="javascript:void(0)" className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]">Contact</NavLink>
                             </li>
 
-                         
+
                         </ul>
                     </div>
 
-                    <div className="flex max-lg:ml-auto space-x-3">
+                    <div className="flex items-center max-lg:ml-auto space-x-3">
+                        {
+                            user && <Link to={'/notice'}>
+                                <IoMdNotifications className='text-3xl' />
+                            </Link>
+                        }
 
                         {
                             user?.email ? <button onClick={handelsignOut}

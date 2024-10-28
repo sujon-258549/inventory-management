@@ -3,10 +3,10 @@ import { useLoaderData } from "react-router-dom"
 
 
 
-const GatDetail = () => {
-    const { _id, email, number, name ,message,date} = useLoaderData()
-  
-    console.log( _id, email, number, name)
+const DetailSaleproduct = () => {
+    const { _id, email, number, name, message, date, role, mobile } = useLoaderData()
+
+    console.log(_id, email, number, name)
     return (
         <div>
              <Helmet>
@@ -18,10 +18,14 @@ const GatDetail = () => {
                 <div className="absolute blur duration-500 group-hover:blur-none w-36 h-36 rounded-full group-hover:translate-x-12 group-hover:-translate-y-12 bg-indigo-800 right-1 -top-12"></div>
                 <div className="absolute blur duration-500 group-hover:blur-none w-24 h-24 bg-sky-700 rounded-full group-hover:-translate-x-12"></div>
                 <div className="z-10 flex flex-col justify-evenly space-y-3 w-full h-full">
-                <span className="text-md text-neutral-400">Date: {date.slice(0,10)}</span>
+                    <span className="text-md text-neutral-400">Date: {date.slice(0, 10)}</span>
                     <span className="text-2xl font-bold">Name: {name}</span>
                     <span className="text-lg">Email: {email}</span>
+                    <span className="text-lg">Mobile : {mobile ? mobile : 'no mobile'}</span>
+                    <span className="text-lg">Role : {role ? role : 'no role'}</span>
+                    <span className="text-2xl font-bold pt-5">All  Product</span>
                     <span className="text-lg">Number: {number}</span>
+
                     <span className="text-md text-neutral-400">Details: {message}</span>
 
                 </div>
@@ -30,4 +34,4 @@ const GatDetail = () => {
     )
 }
 
-export default GatDetail
+export default DetailSaleproduct

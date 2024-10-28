@@ -6,6 +6,7 @@ import '../../../Component/signuplogin/contact.css';
 import { MdOutlineEmail } from "react-icons/md";
 import UseUserrole from "../../customhuk/UseUserrole";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 
 const dressCategories = [
@@ -65,6 +66,9 @@ const Addproduct = () => {
 
     return (
         <div className="md:pb-28 md:pt-5 px-5 pb-10">
+            <Helmet>
+                <title>Home || dashboard Add Product</title>
+            </Helmet>
             <div className="mt-6 max-w-6xl max-lg:max-w-3xl mx-auto bg-[#2e0249] rounded-lg">
                 <div className="flex flex-col-reverse items-center gap-14 sm:p-8 p-4 font-[sans-serif]">
                     <div>

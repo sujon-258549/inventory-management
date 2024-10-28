@@ -7,6 +7,7 @@ import ReactECharts from 'echarts-for-react';
 import { useState, useEffect } from 'react';
 import useAdmin from '../customhuk/UseAdmin';
 import UseUserrole from '../customhuk/UseUserrole';
+import { Helmet } from 'react-helmet-async';
 
 const SideberHome = () => {
     const [isAdmin] = useAdmin();
@@ -76,6 +77,9 @@ const SideberHome = () => {
 
     return (
         <div className='pb-10'>
+            <Helmet>
+                <title>Home || dashboard home</title>
+            </Helmet>
             <div className='min-h-96 walcome flex justify-center items-center'>
                 <div>
                     <h1

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Markationg = () => {
     const [allsupervisor, setAllsupervisor] = useState([]);
@@ -24,7 +25,9 @@ const Markationg = () => {
 
     return (
         <div>
-
+            <Helmet>
+                <title>Home || dashboard All Markating Product</title>
+            </Helmet>
 
             {allsupervisor.map((data) => (
                 <div key={data._id} className="max-w-5xl mx-auto bg-gray-100 p-10 rounded font-sans mb-6">

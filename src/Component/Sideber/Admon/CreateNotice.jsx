@@ -2,6 +2,7 @@ import axios from "axios";
 import { useContext, useState, useEffect } from "react";
 import { CreatAuthContext } from "../../Firebase/Authprovider";
 import Swal from "sweetalert2"; // Ensure you have SweetAlert2 installed
+import { Helmet } from "react-helmet-async";
 
 const CreateNotice = () => {
     const [categorypost, setcategorypost] = useState("");
@@ -59,6 +60,9 @@ const CreateNotice = () => {
 
     return (
         <div className="bg-green-50 font-[sans-serif] lg:h-screen">
+            <Helmet>
+                <title>Home || dashboard Create notice</title>
+            </Helmet>
             <div className="items-center max-lg:justify-center gap-6 h-full sm:p-12 p-8 max-sm:p-4">
                 <div className="max-lg:mx-auto max-lg:text-center max-lg:mb-6">
                     <h2 className="text-4xl font-extrabold text-gray-800">Create Admin Notice</h2>

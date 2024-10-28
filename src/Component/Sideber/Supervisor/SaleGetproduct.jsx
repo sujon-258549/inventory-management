@@ -8,14 +8,14 @@ import UseMarketing from "../../customhuk/UseMarketing";
 import Loding from "../../Loding/Loding";
 import { Helmet } from "react-helmet-async";
 
-const GetSupervisorpost = () => {
+const SaleGetproduct = () => {
     const [isSupervisor] = UseSupervisor()
     const [isAdmin] = useAdmin()
     const [isMarketing] = UseMarketing()
     const { data: alldata, refetch, isLoading, error } = useQuery({
         queryKey: ["allproduct"],
         queryFn: async () => {
-            const result = await axios.get('https://inventory-management-one-psi.vercel.app/getproduct');
+            const result = await axios.get('https://inventory-management-one-psi.vercel.app/getselproduct');
             const sortedProducts = result.data.sort((a, b) => new Date(b.date) - new Date(a.date));
             return sortedProducts;
         },
@@ -57,8 +57,8 @@ const GetSupervisorpost = () => {
 
     return (
         <div className="flex gap-5 flex-wrap justify-center">
-             <Helmet>
-                <title>Home || dashboard  Product</title>
+            <Helmet>
+                <title>Home || dashboard Posduct </title>
             </Helmet>
             {alldata.map(product => (
                 <div key={product._id} className="w-96 min-h-80 duration-500 group overflow-hidden relative rounded bg-neutral-800 text-neutral-50 p-4 flex flex-col justify-evenly">
@@ -70,25 +70,14 @@ const GetSupervisorpost = () => {
                         <span className="text-2xl font-bold">{product.name}</span>
                         <span className="text-lg">{product.email}</span>
                         <span className="text-lg">Store product: {product.number}</span>
+                        <span className="text-2xl font-bold pt-5">Add  product Parsone</span>
+                        <span className="text-lg">Mobile : {product.mobile ? product.mobile :'no mobile'}</span>
+                        <span className="text-lg">Role : {product.role ? product.role : 'no role'}</span>
                         <span className="text-md text-neutral-400">{product.message.slice(0, 30)}...........</span>
                         <div className="flex gap-2 justify-center">
-                            <Link to={`/dashboard/sproduct/${product._id}`} className="hover:bg-neutral-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-3 mt-4 mx-auto text-center">See more</Link>
-                            {
-                                (isAdmin || isMarketing || isSupervisor) && (
-                                    <>
-                                        <Link to={`/dashboard/updateproduct/${product._id}`} className="hover:bg-neutral-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-3 mt-4 mx-auto text-center">
-                                            Update
-                                        </Link>
-
-                                    </>
-                                )
-                            }
-
-                            {
-                                isAdmin && <button onClick={() => handleDeleteProduct(product._id)} className="hover:bg-neutral-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-3 mt-4 mx-auto text-center">
-                                    Delete
-                                </button>
-                            }
+                            <Link to={`/dashboard/getselproductid/${product._id}`} className="hover:bg-neutral-200 bg-neutral-50 rounded text-neutral-800 font-extrabold w-full p-3 mt-4 mx-auto text-center">See more</Link>
+                           
+                            
 
                         </div>
                     </div>
@@ -99,4 +88,4 @@ const GetSupervisorpost = () => {
     );
 };
 
-export default GetSupervisorpost;
+export default SaleGetproduct;

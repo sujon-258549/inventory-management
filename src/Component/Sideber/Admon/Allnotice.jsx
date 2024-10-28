@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Allnotice = () => {
     const [allWorker, setAllWorker] = useState([]);
@@ -7,7 +8,7 @@ const Allnotice = () => {
     useEffect(() => {
         axios.get('https://inventory-management-one-psi.vercel.app/adminpostget')
             .then((result) => {
-               const foundUsers = result?.data
+                const foundUsers = result?.data
 
                 // Sort by date in descending order (newest first)
                 const sortedUsers = foundUsers.sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -20,8 +21,11 @@ const Allnotice = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Home || dashboard all notice</title>
+            </Helmet>
             {allWorker.map((data) => (
-                <div key={data._id} className="max-w-5xl mx-auto bg-gray-100 p-10 rounded font-sans mb-6">
+                <div key={data._id} className="max-w-5xl mx-auto bg-gray-100 p-10 rounded font-sans mb-6" style={{boxShadow:'1px 1px 5px'}}>
                     <div>
                         <p>{new Date(data.date).toLocaleDateString("en-US", { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>
                         <h2 className="text-gray-800 text-2xl font-bold mb-4">
