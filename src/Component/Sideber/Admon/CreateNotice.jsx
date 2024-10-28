@@ -14,7 +14,7 @@ const CreateNotice = () => {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:3000/getuser")
+        axios.get("https://inventory-management-one-psi.vercel.app/getuser")
             .then((result) => {
                 const foundUser = result.data.find(raninguser => raninguser.email === user.email);
                 setUserRole(foundUser);
@@ -44,7 +44,7 @@ const CreateNotice = () => {
         };
 
         try {
-            const res = await axios.post("http://localhost:3000/adminpost", post);
+            const res = await axios.post("https://inventory-management-one-psi.vercel.app/adminpost", post);
             if (res.data.insertedId) {
                 Swal.fire({
                     icon: "success",

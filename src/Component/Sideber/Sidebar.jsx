@@ -1,15 +1,21 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { CreatAuthContext } from "../Firebase/Authprovider";
+// import axios from "axios";
+// import { useContext, useEffect, useState } from "react";
+// import { CreatAuthContext } from "../Firebase/Authprovider";
 import { RxCross2 } from "react-icons/rx";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../customhuk/UseAdmin";
-import { MdDashboard, MdNotificationAdd } from "react-icons/md";
+import { MdAssessment, MdNotificationAdd } from "react-icons/md";
 import { FcSupport } from "react-icons/fc";
 import { GrUserWorker } from "react-icons/gr";
 import { FaSellcast } from "react-icons/fa";
 import UseMarketing from "../customhuk/UseMarketing";
 import UseSupervisor from "../customhuk/UseSuparviser";
+import UseWorker from "../customhuk/UseWorker";
+import { useState } from "react";
+import UseUserrole from "../customhuk/UseUserrole";
+
+
+
 
 
 const Sidebar = () => {
@@ -17,27 +23,29 @@ const Sidebar = () => {
     const [isAdmin] = useAdmin()
     const [isMarketing] = UseMarketing()
     const [isSupervisor] = UseSupervisor()
+    const [isWorker] = UseWorker()
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [isUserrole] = UseUserrole()
 
-    const [userRole, setUserRole] = useState(null);
-    const { user } = useContext(CreatAuthContext);
+    // const [userRole, setUserRole] = useState(null);
+    // const { user } = useContext(CreatAuthContext);
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/getuser')
-            .then((result) => {
-                const foundUser = result.data.find(raninguser => raninguser.email === user.email);
-                setUserRole(foundUser);
-            })
-            .catch((error) => {
-                console.error("Error fetching user role:", error);
-            });
-    }, [user]);
+    // useEffect(() => {
+    //     axios.get('https://inventory-management-one-psi.vercel.app/getuser')
+    //         .then((result) => {
+    //             const foundUser = result.data.find(raninguser => raninguser.email === user.email);
+    //             setUserRole(foundUser);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error fetching user role:", error);
+    //         });
+    // }, [user]);
 
-    console.log(userRole);
+    // console.log(userRole);
 
 
     return (
-        <section className="flex gap-5 pt-20 relative min-h-screen">
+        <section className="flex sodber gap-5 pt-20 relative min-h-screen">
             <nav
                 className={`bg-white shadow-xl top-16 ${isSidebarOpen ? "left-0" : "left-[-400px]"} absolute lg:static lg:top-0 lg:left-0 min-w-[250px] py-6 font-[sans-serif] overflow-auto lg:block`}
                 style={{ transition: 'left 1s' }}
@@ -60,8 +68,9 @@ const Sidebar = () => {
                         {
                             isAdmin &&
                             <>
+
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
-                                    <NavLink href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdDashboard /> Dashboard</NavLink>
+                                    <Link to={'/dashboard'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdAssessment /> Dashboard</Link>
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/supervisor'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FcSupport /> All Supervisor</NavLink>
@@ -74,17 +83,38 @@ const Sidebar = () => {
                                     <NavLink to={'/dashboard/marketing'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FaSellcast /> All Sellar</NavLink>
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/getsupervisorpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> All Product</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/allnotice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> All Notice</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/allcontact'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> All Contact Info</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/notice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Creat Notice</NavLink>
                                 </li>
+
 
                             </>
 
                         }
                         {
                             isMarketing && <>
-
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <Link to={'/dashboard'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdAssessment /> Dashboard</Link>
+                                </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/markatingetpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FaSellcast /> Admin Notice</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/getmarkatingsuperviserpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Supervisor Notice</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/workernotice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Worker Notice</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/getsupervisorpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> All Product</NavLink>
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/notice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Creat Notice</NavLink>
@@ -94,9 +124,44 @@ const Sidebar = () => {
                         }
                         {
                             isSupervisor && <>
-
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <Link to={'/dashboard'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdAssessment /> Dashboard</Link>
+                                </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/supervisorgetpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FaSellcast /> Admin Notice</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/getsupervisorpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> All Product</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/workernotice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Worker Notice</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/supervisornotice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Supervisor Notice</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/addproduct'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Creat Product post</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/notice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Creat Notice</NavLink>
+                                </li>
+
+                            </>
+                        }
+                        {
+                            isWorker && <>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <Link to={'/dashboard'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdAssessment /> Dashboard</Link>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/workergetpost'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><FaSellcast /> Admin Notice</NavLink>
+                                </li>
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/workernotice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Worker Notice</NavLink>
+                                </li>
+
+                                <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                    <NavLink to={'/dashboard/supervisornotice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Supervisor Notice</NavLink>
                                 </li>
                                 <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
                                     <NavLink to={'/dashboard/notice'} href="javascript:void(0)" className="flex items-center text-xl font-playfair gap-2 hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]"><MdNotificationAdd /> Creat Notice</NavLink>
@@ -112,8 +177,8 @@ const Sidebar = () => {
                             className="w-9 h-9 rounded-full border-white"
                         />
                         <div className="ml-4">
-                            <p className="text-sm text-black">John Doe</p>
-                            <p className="text-xs text-gray-500 mt-0.5">Active free account</p>
+                            <p className="text-sm text-black">{isUserrole?.name}</p>
+                            <p className="text-xs text-gray-500 mt-0.5">{isUserrole?.email}</p>
                         </div>
                     </div>
                 </div>
@@ -152,15 +217,17 @@ const Sidebar = () => {
 
                     </div>
                     <h1 className="text-2xl md:text-4xl lg:text-6xl font-bold font-playfair text-center ">
-                        {userRole?.role.charAt(0).toUpperCase() + userRole?.role.slice(1)} Dashboard
+                        {isUserrole?.role.charAt(0).toUpperCase() + isUserrole?.role.slice(1)} Dashboard
                     </h1>
+
                 </div>
                 <div className="divider -mt-1 w-full"></div>
+
 
                 <Outlet></Outlet>
             </div>
 
-        </section>
+        </section >
     );
 };
 

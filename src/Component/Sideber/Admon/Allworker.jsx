@@ -1,26 +1,48 @@
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import UseAllworker from "../../customhuk/UseAllworker";
+import Loding from "../../Loding/Loding";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Allworker = () => {
-    const [allSupervisors, setAllSupervisors] = useState([]);
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/getuser')
-            .then((result) => {
-                const foundUsers = result.data.filter(user => user.role === "worker");
-                setAllSupervisors(foundUsers);
-            })
-            .catch((error) => {
-                console.error("Error fetching user role:", error);
-            });
-    }, []);
+    const { allworker,refetch, isLoading } = UseAllworker();
 
-    console.log(allSupervisors);
+    if (isLoading) {
+        return <p><Loding></Loding></p>;
+    }
+   
+    const handelworkerdelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.delete(`https://inventory-management-one-psi.vercel.app/userdelete/${id}`)
+                    .then(() => {
+                        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                        refetch()
+                    })
+                    .catch((error) => {
+                        console.error("Error deleting supervisor:", error);
+                        Swal.fire("Error!", "There was a problem deleting the supervisor.", "error");
+                    });
+            }
+        });
+    };
+
 
     return (
         <div>
             <div>
-                {allSupervisors.length <= 0 ? (
+                {allworker.length <= 0 ? (
                     <h1 className="text-4xl font-bold font-playfair">No supervisor</h1>
                 ) : (
                     <div className="font-sans overflow-x-auto">
@@ -35,7 +57,7 @@ const Allworker = () => {
                                 </tr>
                             </thead>
                             <tbody className="whitespace-nowrap">
-                                {allSupervisors.map(supervisor => (
+                                {allworker.map(supervisor => (
                                     <tr className="even:bg-blue-50" key={supervisor._id}>
                                         <td className="p-4 text-sm text-black">{supervisor.name}</td>
                                         <td className="p-4 text-sm text-black">{supervisor.email}</td>
@@ -43,8 +65,8 @@ const Allworker = () => {
                                         <td className="p-4 text-sm text-black">
                                             {supervisor.date ? supervisor.date.slice(0, 10) : "N/A"}
                                         </td>
-                                        <td className="p-4">
-                                            <button className="mr-4" title="Edit">
+                                        <td className="p-4 flex items-center">
+                                            <Link to={`/dashboard/detailuser/${supervisor._id}`} className="mr-4" title="Edit">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     className="w-5 fill-blue-500 hover:fill-blue-700"
@@ -59,8 +81,8 @@ const Allworker = () => {
                                                         data-original="#000000"
                                                     />
                                                 </svg>
-                                            </button>
-                                            <button className="mr-4" title="Delete">
+                                            </Link>
+                                            <button onClick={()=>handelworkerdelete(supervisor._id)} className="mr-4" title="Delete">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     className="w-5 fill-red-500 hover:fill-red-700"

@@ -3,10 +3,7 @@ import { useContext, useState } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { Link, NavLink } from 'react-router-dom';
 import { CreatAuthContext } from '../Firebase/Authprovider';
-import useAdmin from '../customhuk/UseAdmin';
-import UseSuparviser from '../customhuk/UseSuparviser';
-import UseMarketing from '../customhuk/UseMarketing';
-import UseWorker from '../customhuk/UseWorker';
+import './navber.css'
 
 const Navber = () => {
 
@@ -22,13 +19,8 @@ const Navber = () => {
         signout()
     }
 
-    // console.log(user?.email)
 
 
-    const [isSupervisor] = UseSuparviser()
-    const [isMarketing] = UseMarketing()
-    const [isWorker] = UseWorker()
-    // console.log([isSupervisor])
 
 
 
@@ -36,7 +28,7 @@ const Navber = () => {
 
     return (
 
-        <section className='fixed w-full' style={{ zIndex: '999' }}>
+        <section className='fixed w-full navber' style={{ zIndex: '999' }}>
 
             <header className="flex shadow-md py-4 px-4  sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50">
                 <div className="flex flex-wrap items-center justify-between gap-5 w-full">
@@ -64,44 +56,29 @@ const Navber = () => {
 
                         <ul className="lg:flex gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
                             <li className="mb-6 hidden max-lg:block">
-                                <a href="javascript:void(0)">
+                                <NavLink to={'/'} href="javascript:void(0)">
                                     <img src="https://readymadeui.com/readymadeui.svg" alt="logo" className="w-36" />
-                                </a>
+                                </NavLink>
                             </li>
                             <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
-                                <a href="javascript:void(0)" className="hover:text-[#007bff] text-[#007bff] block font-semibold text-[15px]">Home</a>
+                                <NavLink to={'/'} href="javascript:void(0)" className=" block font-semibold text-[15px]">Home</NavLink>
+                            </li>
+                            <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                <NavLink to={'/about'} href="javascript:void(0)" className=" block font-semibold text-[15px]">About</NavLink>
                             </li>
                             {
                                 user && <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
-                                    <NavLink to={'/dashboard'} href="javascript:void(0)" className="hover:text-[#007bff] text-[#007bff] block font-semibold text-[15px]">Dashboad</NavLink>
+                                    <NavLink to={'/dashboard'} href="javascript:void(0)" className=" block font-semibold text-[15px]">Dashboad</NavLink>
                                 </li>
                             }
 
-                            
-                            {
-                                isSupervisor && <>
-                                    <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
-                                        <a href="javascript:void(0)" className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]">Contact</a>
-                                    </li>
 
-                                </>
-                            }
-                            {
-                                isMarketing && <>
-                                    <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
-                                        <a href="javascript:void(0)" className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]">All Markatiog post</a>
-                                    </li>
 
-                                </>
-                            }
-                            {
-                                isWorker && <>
-                                    <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
-                                        <a href="javascript:void(0)" className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]">All Worker post</a>
-                                    </li>
+                            <li className="max-lg:border-b border-gray-300 max-lg:py-3 px-3">
+                                <NavLink to={'/contact'} href="javascript:void(0)" className="hover:text-[#007bff] text-gray-500 block font-semibold text-[15px]">Contact</NavLink>
+                            </li>
 
-                                </>
-                            }
+                         
                         </ul>
                     </div>
 

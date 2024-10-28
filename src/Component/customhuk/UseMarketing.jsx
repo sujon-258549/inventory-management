@@ -9,7 +9,7 @@ const UseMarketing = () => {
     const { data: isMarketing } = useQuery({
         queryKey: [user?.email, "isMarketing"],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:3000/user/marketing/${user.email}`);
+            const res = await axios.get(`https://inventory-management-one-psi.vercel.app/user/marketing/${user.email}`);
             console.log("Marketing status:", res?.data?.marketing);
             return res?.data?.marketing;
         },

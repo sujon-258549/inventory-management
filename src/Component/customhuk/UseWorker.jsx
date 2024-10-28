@@ -1,23 +1,23 @@
-import { useContext } from "react"
-import { CreatAuthContext } from "../Firebase/Authprovider"
-import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
-
+import { useContext } from "react";
+import { CreatAuthContext } from "../Firebase/Authprovider";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const UseWorker = () => {
-    const { user } = useContext(CreatAuthContext)
+    const { user } = useContext(CreatAuthContext);
+
     const { data: isWorker } = useQuery({
-        queryKye: [user?.email, "isWorker"],
+        queryKey: [user?.email, "isWorker"],
         queryFn: async () => {
-            if (user?.email) {
-                const res = await axios.get(`http://localhost:3000/user/worker/${user.email}`);
-               console.log( res?.data?.worker ,"worker status")
-                return res?.data?.worker
-            }
-        }
-    })
+            if (!user?.email) return false; 
+                const res = await axios.get(`https://inventory-management-one-psi.vercel.app/user/worker/${user.email}`);
+                console.log("Supervisor status:", res?.data?.supervisor);
+                return res?.data?.supervisor;
+            
+        },
+    });
 
-    return [isWorker]
-}
+    return [isWorker];
+};
 
-export default UseWorker
+export default UseWorker;

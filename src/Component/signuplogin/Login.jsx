@@ -36,7 +36,7 @@ const Login = () => {
     return (
         <div>
             <div
-                className="flex justify-center items-center font-[sans-serif] h-full min-h-screen p-4"
+                className="flex justify-center items-center pt-16 md:pt-32 font-[sans-serif] h-full min-h-screen p-4"
                 style={{
                     backgroundImage: "url(https://readymadeui.com/background-image.webp)",
                     backgroundRepeat: "no-repeat",

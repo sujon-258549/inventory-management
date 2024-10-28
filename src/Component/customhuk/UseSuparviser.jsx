@@ -10,7 +10,7 @@ const UseSupervisor = () => {
         queryKey: [user?.email, "isSupervisor"],
         queryFn: async () => {
             if (!user?.email) return false; 
-                const res = await axios.get(`http://localhost:3000/user/supervisor/${user.email}`);
+                const res = await axios.get(`https://inventory-management-one-psi.vercel.app/user/supervisor/${user.email}`);
                 console.log("Supervisor status:", res?.data?.supervisor);
                 return res?.data?.supervisor;
             

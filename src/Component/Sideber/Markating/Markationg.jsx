@@ -1,28 +1,32 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const Getadminpost = () => {
-    const [allMarketingPosts, setAllMarketingPosts] = useState([]);
+const Markationg = () => {
+    const [allsupervisor, setAllsupervisor] = useState([]);
 
     useEffect(() => {
         axios.get('https://inventory-management-one-psi.vercel.app/adminpostget')
             .then((result) => {
-                const foundUsers = result?.data?.filter(user => user.categorypost === "marketing");
+                const foundUsers = result?.data?.filter(user =>
+                    user.categorypost === "supervisor" && user.poster.role === "supervisor"
+                );
+
                 const sortedUsers = foundUsers.sort((a, b) => new Date(b.date) - new Date(a.date));
-                setAllMarketingPosts(sortedUsers);
+                setAllsupervisor(sortedUsers);
             })
             .catch((error) => {
-                console.error("Error fetching user role:", error);
+                console.error("Error fetching posts:", error);
             });
     }, []);
 
-    console.log(allMarketingPosts)
+
+    console.log(allsupervisor)
 
     return (
         <div>
 
 
-            {allMarketingPosts.map((data) => (
+            {allsupervisor.map((data) => (
                 <div key={data._id} className="max-w-5xl mx-auto bg-gray-100 p-10 rounded font-sans mb-6">
                     <div>
                         <p>{new Date(data.date).toLocaleDateString()}</p>
@@ -47,4 +51,4 @@ const Getadminpost = () => {
     );
 }
 
-export default Getadminpost;
+export default Markationg;

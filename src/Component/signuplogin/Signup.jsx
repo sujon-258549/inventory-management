@@ -24,11 +24,11 @@ const Signup = () => {
             return;
         }
 
-        if (password.number.length < 11) {
-            toast.error('number must be 11 characters !');
+        if (number.value.length !== 11) {
+            toast.error("Number must be exactly 11 characters!");
             return;
         }
-
+        
         if (password.value.length < 6) {
             toast.error('Password must be 6 characters or longer!');
             return;
@@ -50,7 +50,7 @@ const Signup = () => {
 
         try {
             const result = await creatUser(email.value, password.value);
-            const res = await axios.post('http://localhost:3000/users', userinfo);
+            const res = await axios.post('https://inventory-management-one-psi.vercel.app/users', userinfo);
             if (res.data.insertedId) {
                 Swal.fire({
                     icon: "success",
@@ -69,7 +69,7 @@ const Signup = () => {
 
     return (
         <section>
-            <div className="py-20 md:py-40 shadow-md">
+            <div className="pt-20 pb-10 md:pt-60 md:pb-40 shadow-md">
                 <div className="font-sans h-full bg-white max-w-4xl flex items-center mx-auto md:h-screen p-4">
                     <div className="grid md:grid-cols-3 items-center shadow-lg rounded-xl overflow-hidden">
                         <div className="max-md:order-1 flex flex-col justify-center space-y-16 max-md:mt-16 min-h-full bg-gradient-to-r from-gray-900 to-gray-700 lg:px-8 px-4 py-4">
